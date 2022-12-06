@@ -55,7 +55,8 @@ def main():
     f.User_full = True
 
     runs = [
-        twint.run.Profile,  # this doesn't
+        #TODO: understand this fail
+        # twint.run.Profile,  # this doesn't
         twint.run.Search,  # this works
         twint.run.Following,
         twint.run.Followers,
