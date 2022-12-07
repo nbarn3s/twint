@@ -73,6 +73,7 @@ Noticed a lot of people are having issues installing (including me). Please use 
 These are few simple examples to help you understand the basics.
 Note that if you clone this repo instead of installing the wheel, then use `python -m twint` instead of `twint`.  Also, either add the
 location of the twint directory to your pythonpath or run from the cloned directory.
+
 **THE FOLLOWING SEEM TO WORK**
 - `twint -h` - Show the usage statement with commandline arguments
 - `twint -u username --user-full` - Collect full user information
@@ -87,13 +88,16 @@ location of the twint directory to your pythonpath or run from the cloned direct
 - `twint -u username -o file.json --json` - Scrape Tweets and save as a json file.
 - `twint -s "Donald Trump" --verified` - Display Tweets by verified users that Tweeted about Donald Trump.
 - `twint -g="48.880048,2.385939,1km" -o file.csv --csv` - Scrape Tweets from a radius of 1km around a place in Paris and export them to a csv file.
+
 **NEED TO TEST**
 - `twint -u username -es localhost:9200` - Output Tweets to Elasticsearch 
 - `twint -u username --database tweets.db` - Save Tweets to a SQLite database.
 - `twint -u username --resume resume_file.txt` - Resume a search starting from the last saved scroll-id.
+
 **NEED TO TEST, DON'T THINK IT IS WORKING**
 - `twint -u username --email --phone` - Show Tweets that might have phone numbers or email addresses. 
 - `twint -u username --favorites` - Collect all the Tweets a user has favorited (gathers ~3200 tweet). 
+
 **FAILS**
 - `twint -u username --followers` - Scrape a Twitter user's followers. 
 - `twint -u username --following` - Scrape who a Twitter user follows.
