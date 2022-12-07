@@ -14,9 +14,19 @@ VERSION = None
 
 # Packages required
 REQUIRED = [
-    'aiohttp', 'aiodns', 'beautifulsoup4', 'cchardet', 'dataclasses',
-    'elasticsearch', 'pysocks', 'pandas', 'aiohttp_socks',
-    'schedule', 'geopy', 'fake-useragent', 'googletransx'
+    'aiohttp==3.7.0', 
+    'aiodns', 
+    'beautifulsoup4', 
+    'cchardet', 
+    'dataclasses',
+    'elasticsearch', 
+    'pysocks', 
+    'pandas>=0.23.0', 
+    'aiohttp_socks<=0.4.1',
+    'schedule', 
+    'geopy', 
+    'fake-useragent', 
+    'googletransx'
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -45,7 +55,7 @@ setup(
     packages=['twint', 'twint.storage'],
     entry_points={
         'console_scripts': [
-            'twint = twint.cli:run_as_command',
+            'twint = twint.cli:__main__:main',
         ],
     },
     install_requires=REQUIRED,

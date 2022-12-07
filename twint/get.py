@@ -122,10 +122,10 @@ async def RequestUrl(config, init):
         _url, params, _serialQuery = await url.Search(config, init)
     else:
         if config.Following:
-            logme.debug(__name__ + ':RequestUrl:Following')
+            logme.debug(__name__ + ':RequestUrl:Following: ' + config.Username)
             _url = await url.Following(config.Username, init)
         elif config.Followers:
-            logme.debug(__name__ + ':RequestUrl:Followers')
+            logme.debug(__name__ + ':RequestUrl:Followers of: ' + config.Username)
             _url = await url.Followers(config.Username, init)
         else:
             logme.debug(__name__ + ':RequestUrl:Favorites')
@@ -137,6 +137,7 @@ async def RequestUrl(config, init):
     if config.Debug:
         print(_serialQuery, file=open("twint-request_urls.log", "a", encoding="utf-8"))
 
+    logme.debug(__name__ + ':RequestUrl _serialQuery: ' + _serialQuery)
     return response
 
 

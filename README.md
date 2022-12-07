@@ -24,7 +24,7 @@ Twitter limits scrolls while browsing the user timeline. This means that with `.
 
 ## Requirements
 - Python 3.6;
-- aiohttp;
+- aiohttp (3.7.0);
 - aiodns;
 - beautifulsoup4;
 - cchardet;
@@ -32,7 +32,7 @@ Twitter limits scrolls while browsing the user timeline. This means that with `.
 - elasticsearch;
 - pysocks;
 - pandas (>=0.23.0);
-- aiohttp_socks;
+- aiohttp_socks (<=0.4.1);
 - schedule;
 - geopy;
 - fake-useragent;
@@ -70,8 +70,12 @@ pipenv install git+https://github.com/twintproject/twint.git#egg=twint
 Noticed a lot of people are having issues installing (including me). Please use the Dockerfile temporarily while I look into them. 
 
 ## CLI Basic Examples and Combos
-A few simple examples to help you understand the basics:
-
+These are few simple examples to help you understand the basics.
+Note that if you clone this repo instead of installing the wheel, then use `python -m twint` instead of `twint`.  Also, either add the
+location of the twint directory to your pythonpath or run from the cloned directory.
+**THE FOLLOWING SEEM TO WORK**
+- `twint -h` - Show the usage statement with commandline arguments
+- `twint -u username --user-full` - Collect full user information
 - `twint -u username` - Scrape all the Tweets of a *user* (doesn't include **retweets** but includes **replies**).
 - `twint -u username -s pineapple` - Scrape all Tweets from the *user*'s timeline containing _pineapple_.
 - `twint -s pineapple` - Collect every Tweet containing *pineapple* from everyone's Tweets.
@@ -80,19 +84,22 @@ A few simple examples to help you understand the basics:
 - `twint -u username --since 2015-12-20` - Collect Tweets that were tweeted since 2015-12-20 00:00:00.
 - `twint -u username -o file.txt` - Scrape Tweets and save to file.txt.
 - `twint -u username -o file.csv --csv` - Scrape Tweets and save as a csv file.
-- `twint -u username --email --phone` - Show Tweets that might have phone numbers or email addresses.
+- `twint -u username -o file.json --json` - Scrape Tweets and save as a json file.
 - `twint -s "Donald Trump" --verified` - Display Tweets by verified users that Tweeted about Donald Trump.
 - `twint -g="48.880048,2.385939,1km" -o file.csv --csv` - Scrape Tweets from a radius of 1km around a place in Paris and export them to a csv file.
-- `twint -u username -es localhost:9200` - Output Tweets to Elasticsearch
-- `twint -u username -o file.json --json` - Scrape Tweets and save as a json file.
+**NEED TO TEST**
+- `twint -u username -es localhost:9200` - Output Tweets to Elasticsearch 
 - `twint -u username --database tweets.db` - Save Tweets to a SQLite database.
-- `twint -u username --followers` - Scrape a Twitter user's followers.
+- `twint -u username --resume resume_file.txt` - Resume a search starting from the last saved scroll-id.
+**NEED TO TEST, DON'T THINK IT IS WORKING**
+- `twint -u username --email --phone` - Show Tweets that might have phone numbers or email addresses. 
+- `twint -u username --favorites` - Collect all the Tweets a user has favorited (gathers ~3200 tweet). 
+**FAILS**
+- `twint -u username --followers` - Scrape a Twitter user's followers. 
 - `twint -u username --following` - Scrape who a Twitter user follows.
-- `twint -u username --favorites` - Collect all the Tweets a user has favorited (gathers ~3200 tweet).
 - `twint -u username --following --user-full` - Collect full user information a person follows
 - `twint -u username --timeline` - Use an effective method to gather Tweets from a user's profile (Gathers ~3200 Tweets, including **retweets** & **replies**).
 - `twint -u username --retweets` - Use a quick method to gather the last 900 Tweets (that includes retweets) from a user's profile.
-- `twint -u username --resume resume_file.txt` - Resume a search starting from the last saved scroll-id.
 
 More detail about the commands and options are located in the [wiki](https://github.com/twintproject/twint/wiki/Commands)
 
@@ -140,6 +147,7 @@ twint.run.Search(c)
 ## Elasticsearch Setup
 
 Details on setting up Elasticsearch with Twint is located in the [wiki](https://github.com/twintproject/twint/wiki/Elasticsearch).
+The packages needed are [Elasticsearch and Kibana](https://www.elastic.co)
 
 ## Graph Visualization
 ![graph](https://i.imgur.com/EEJqB8n.png)
